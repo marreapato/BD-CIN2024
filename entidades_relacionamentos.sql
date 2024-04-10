@@ -1,6 +1,6 @@
 -- ENTIDADE TRECHO
 CREATE TABLE trecho (
-    pkid_trecho INTEGER, -- trecho ID
+    pkid_trecho NUMBER(38,0), -- trecho ID
     origem VARCHAR2(3),       -- origem IATA 3
     destino VARCHAR2(3),      -- destino IATA 3
     CONSTRAINT trecho_pkey PRIMARY KEY (pkid_trecho) -- constraint de primary key
@@ -25,7 +25,7 @@ SELECT * FROM HOTEL;
 -- CIA AEREA
 CREATE TABLE CIA_AEREA(
 
-    pkid_cia INTEGER,
+    pkid_cia NUMBER(38,0),
     nome_cia varchar2(30),
     taxa_comissao_cia BINARY_FLOAT, --taxa da cia
     email_cia varchar2(30),--Email simples cia
@@ -67,3 +67,16 @@ CREATE TABLE PASSAGEIRO_CONTRATANTE(
 SELECT * FROM PASSAGEIRO_CONTRATANTE;
 
 -- relacionamentos
+--CADASTRO CIA AEREA E TRECHO
+CREATE TABLE CADASTRO(    
+    pkid_cadastro VARCHAR2(22),
+    data_cadastro date,
+    fkid_cia_aerea NUMBER(38,0),
+    fkid_trecho NUMBER(38,0),
+    CONSTRAINT cadastro_pkey PRIMARY KEY(pkid_cadastro),
+    CONSTRAINT cadastro_fkey_cia FOREIGN KEY(fkid_cia_aerea) REFERENCES CIA_AEREA(pkid_cia),
+    CONSTRAINT cadastro_fkey_trecho FOREIGN KEY(fkid_trecho) REFERENCES trecho(pkid_trecho)
+);
+
+SELECT * FROM CADASTRO;
+--DROP TABLE CADASTRO;
