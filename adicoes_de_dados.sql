@@ -1,0 +1,7 @@
+INSERT INTO HOTEL (pkid_hotel,nome,endereco_hotel)
+VALUES (1,'Hotel ABC',tp_endereco('Brasil','30289-020','São Paulo','São Paulo','123 Main St'));
+
+SELECT * FROM HOTEL;
+
+SELECT H.PKID_HOTEL, H.NOME, H.ENDERECO_HOTEL.CEP, H.ENDERECO_HOTEL.PROVINCIA FROM HOTEL H WHERE PKID_HOTEL=1;
+
