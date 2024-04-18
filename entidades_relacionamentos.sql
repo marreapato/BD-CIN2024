@@ -22,32 +22,6 @@ CREATE TABLE HOTEL(
 
 SELECT * FROM HOTEL;
 
--- CIA AEREA
-CREATE TABLE CIA_AEREA(
-
-    pkid_cia NUMBER(38,0),
-    nome_cia varchar2(30),
-    taxa_comissao_cia BINARY_FLOAT, --taxa da cia
-    email_cia varchar2(30),--Email simples cia
-    telefone_cia varchar2(30),
-    status_ativo varchar2(30),
-    CONSTRAINT cia_pkey PRIMARY KEY(pkid_cia)
-);
-
-SELECT * FROM CIA_AEREA;
-
---ENTIDADE DEPENDENTE
-
-CREATE TABLE DEPENDENTES(
-    pk_cpf_dependente VARCHAR2(30),
-    nome VARCHAR2(30),
-    idade INTEGER,
-    sexo VARCHAR2(1),
-    CONSTRAINT dep_cpf_pkey PRIMARY KEY(pk_cpf_dependente)
-);
-
-SELECT * FROM DEPENDENTES;
-
 -- PASSAGEIRO CONTRATANTE
 
 CREATE TABLE PASSAGEIRO_CONTRATANTE(
@@ -71,10 +45,8 @@ SELECT * FROM PASSAGEIRO_CONTRATANTE;
 CREATE TABLE CADASTRO(    
     pkid_cadastro VARCHAR2(22),
     data_cadastro date,
-    fkid_cia_aerea NUMBER(38,0),
     fkid_trecho NUMBER(38,0),
     CONSTRAINT cadastro_pkey PRIMARY KEY(pkid_cadastro),
-    CONSTRAINT cadastro_fkey_cia FOREIGN KEY(fkid_cia_aerea) REFERENCES CIA_AEREA(pkid_cia),
     CONSTRAINT cadastro_fkey_trecho FOREIGN KEY(fkid_trecho) REFERENCES trecho(pkid_trecho)
 );
 
