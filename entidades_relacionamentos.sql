@@ -9,6 +9,8 @@ CREATE TABLE HOTEL(
 
 SELECT * FROM HOTEL;
 
+--Instance01 sid
+
 --DROP TABLE HOTEL;
 
 -- ENTIDADE VOO
@@ -21,10 +23,18 @@ CREATE TABLE VOO (
     CONSTRAINT voo_pkey PRIMARY KEY (pk_numero_voo) -- constraint de primary key
 );
 
-SELECT * FROM VOO;
-
 --DROP TABLE VOO;
+--PASSAGEM
+CREATE TABLE PASSAGEM(    
+    pk_numero_passagem VARCHAR2(22),
+    valor_passagem NUMBER(38,2),
+    data_ida DATE,
+    data_chegada DATE,
+    CONSTRAINT numero_passagem_pkey PRIMARY KEY(pk_numero_passagem)
+);
 
+SELECT * FROM PASSAGEM;
+--DROP TABLE CADASTRO;
 
 -- PASSAGEIRO CONTRATANTE
 
@@ -45,14 +55,3 @@ CREATE TABLE PASSAGEIRO_CONTRATANTE(
 SELECT * FROM PASSAGEIRO_CONTRATANTE;
 
 -- relacionamentos
---CADASTRO CIA AEREA E TRECHO
-CREATE TABLE CADASTRO(    
-    pkid_cadastro VARCHAR2(22),
-    data_cadastro date,
-    fkid_trecho NUMBER(38,0),
-    CONSTRAINT cadastro_pkey PRIMARY KEY(pkid_cadastro),
-    CONSTRAINT cadastro_fkey_trecho FOREIGN KEY(fkid_trecho) REFERENCES trecho(pkid_trecho)
-);
-
-SELECT * FROM CADASTRO;
---DROP TABLE CADASTRO;
