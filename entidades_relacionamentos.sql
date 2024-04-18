@@ -1,26 +1,30 @@
--- ENTIDADE TRECHO
-CREATE TABLE trecho (
-    pkid_trecho NUMBER(38,0), -- trecho ID
-    origem VARCHAR2(3),       -- origem IATA 3
-    destino VARCHAR2(3),      -- destino IATA 3
-    CONSTRAINT trecho_pkey PRIMARY KEY (pkid_trecho) -- constraint de primary key
-);
-
-SELECT * FROM TRECHO;
-
---DROP TABLE TRECHO;
-
 -- ENTIDADE HOTEL
 CREATE TABLE HOTEL(
 
     pkid_hotel INTEGER,
     nome VARCHAR2(30),
-    taxa_comissao BINARY_FLOAT,
-    --avg_estrelas BINARY_FLOAT Devo fazer em uma view? acho que fica complicado colocar em uma tabela
+    endereco_hotel tp_endereco,
     CONSTRAINT hotel_pkey PRIMARY KEY (pkid_hotel)
 );
 
 SELECT * FROM HOTEL;
+
+--DROP TABLE HOTEL;
+
+-- ENTIDADE VOO
+CREATE TABLE VOO (
+    pk_numero_voo NUMBER(38,0), -- trecho ID
+    origem VARCHAR2(3),       -- origem IATA 3
+    destino VARCHAR2(3),      -- destino IATA 3
+    hora_embarque TIMESTAMP,
+    hora_desembarque TIMESTAMP,
+    CONSTRAINT voo_pkey PRIMARY KEY (pk_numero_voo) -- constraint de primary key
+);
+
+SELECT * FROM VOO;
+
+--DROP TABLE VOO;
+
 
 -- PASSAGEIRO CONTRATANTE
 
