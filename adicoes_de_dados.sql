@@ -32,3 +32,12 @@ TO_DATE('15/06/2012', 'DD/MM/YYYY')
 
 
 SELECT * FROM PASSAGEM;
+
+--
+
+INSERT INTO ESTADIA (pk_cod_estadia,valor_estadia,data_check_in,data_check_out)
+VALUES(1,2506.35,TO_DATE('14/06/2012', 'DD/MM/YYYY'),TO_DATE('20/06/2012', 'DD/MM/YYYY'));
+
+SELECT * FROM ESTADIA;
+
+--
