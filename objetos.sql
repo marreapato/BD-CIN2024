@@ -60,3 +60,37 @@ CREATE TYPE MAIOR_IDADE_TP UNDER TP_PESSOA();
 CREATE TABLE MAIOR_IDADE_TB OF MAIOR_IDADE_TP;
 
 SELECT * FROM MAIOR_IDADE_TB;
+
+----
+
+DROP TABLE VOO;
+-- ENTIDADE VOO
+CREATE OR REPLACE TYPE VOO_TP AS OBJECT(
+    pk_numero_voo NUMBER(38,0), -- trecho ID
+    origem VARCHAR2(3),       -- origem IATA 3
+    destino VARCHAR2(3),      -- destino IATA 3
+    hora_embarque TIMESTAMP,
+    hora_desembarque TIMESTAMP
+);
+
+CREATE TABLE VOO OF VOO_TP(
+    CONSTRAINT voo_pkey PRIMARY KEY (pk_numero_voo) -- constraint de primary key
+);
+
+--DROP TABLE PASSAGEM;
+--PASSAGEM
+CREATE TYPE PASSAGEM_TP AS OBJECT(    
+    pk_numero_passagem VARCHAR2(22),
+    valor_passagem NUMBER(38,2),
+    data_ida DATE,
+    data_chegada DATE
+);
+
+CREATE TABLE PASSAGEM OF PASSAGEM_TP(    
+    CONSTRAINT numero_passagem_pkey PRIMARY KEY(pk_numero_passagem)
+);
+
+CREATE OR REPLACE TYPE tp_relac AS OBJECT(
+passagem REF tp_projeto,
+voo REF tp_atividade,
+) NOT
