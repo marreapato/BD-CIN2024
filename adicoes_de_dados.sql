@@ -26,8 +26,9 @@ SELECT ORIGEM,DESTINO,TO_CHAR(hora_embarque,'HH24:MI'),TO_CHAR(hora_desembarque,
 INSERT INTO PASSAGEM (pk_numero_passagem,valor_passagem,data_ida,data_chegada)
 VALUES(1,
 504.23,
-TO_DATE('08:20', 'HH24:,MI'),
-TO_DATE('11:45','HH24:MI'));
+TO_DATE('14/06/2012', 'DD/MM/YYYY'), 
+TO_DATE('15/06/2012', 'DD/MM/YYYY')
+);
 
-SELECT * FROM VOO;
-SELECT TO_CHAR(hora_embarque,'HH24:MI'),TO_CHAR(hora_desembarque,'HH24:MI') FROM VOO;
+
+SELECT * FROM PASSAGEM;
