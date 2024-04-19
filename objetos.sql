@@ -90,7 +90,9 @@ CREATE TABLE PASSAGEM OF PASSAGEM_TP(
     CONSTRAINT numero_passagem_pkey PRIMARY KEY(pk_numero_passagem)
 );
 
-CREATE OR REPLACE TYPE tp_relac AS OBJECT(
-passagem REF tp_projeto,
-voo REF tp_atividade,
-) NOT
+CREATE OR REPLACE TYPE tp_refere_se AS OBJECT(
+passagem REF PASSAGEM_TP,
+voo REF VOO_TP
+);
+
+CREATE TABLE REFERE_SE_TB OF TP_REFERE_SE;
