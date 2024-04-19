@@ -11,6 +11,9 @@ SELECT * FROM HOTEL;
 
 --Instance01 sid
 
+--DROP TABLE HOTEL;
+
+--DROP TABLE VOO;
 
 -- ESTADIA
 
@@ -22,6 +25,3 @@ CREATE TABLE ESTADIA(
  data_check_out DATE,
  CONSTRAINT cod_estadia_pkey PRIMARY KEY(pk_cod_estadia)
 );
-
-
--- relacionamentos
