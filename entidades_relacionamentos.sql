@@ -47,22 +47,5 @@ CREATE TABLE ESTADIA(
  CONSTRAINT cod_estadia_pkey PRIMARY KEY(pk_cod_estadia)
 );
 
--- PASSAGEIRO CONTRATANTE
-
-CREATE TABLE PASSAGEIRO_CONTRATANTE(
-    pk_cpf VARCHAR2(30),
-    sexo VARCHAR2(1),
-    email VARCHAR2(30),
-    telefone VARCHAR2(30),
-    pais VARCHAR2(30),
-    cidade VARCHAR2(30),
-    estado VARCHAR2(30),
-    cep VARCHAR2(30),
-    complemento_end VARCHAR2(30),
-    nome VARCHAR2(30),
-    CONSTRAINT cpf_pkey PRIMARY KEY(pk_cpf)
-);
-
-SELECT * FROM PASSAGEIRO_CONTRATANTE;
 
 -- relacionamentos
