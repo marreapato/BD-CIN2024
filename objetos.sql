@@ -96,3 +96,33 @@ voo REF VOO_TP
 );
 
 CREATE TABLE REFERE_SE_TB OF TP_REFERE_SE;
+
+--DROP TABLE HOTEL;
+-- ENTIDADE HOTEL
+CREATE TYPE HOTEL_TP AS OBJECT(
+
+    pkid_hotel INTEGER,
+    nome VARCHAR2(30),
+    endereco_hotel tp_endereco
+);
+
+-- ENTIDADE HOTEL
+CREATE TABLE HOTEL OF HOTEL_TP(
+    CONSTRAINT hotel_pkey PRIMARY KEY (pkid_hotel)
+);
+
+----
+
+CREATE TYPE ESTADIA_TP AS OBJECT(
+
+ pk_cod_estadia INTEGER,
+ valor_estadia NUMBER(38,2),
+ data_check_in DATE,
+ data_check_out DATE
+);
+
+--DROP TABLE ESTADIA;
+
+CREATE TABLE ESTADIA OF ESTADIA_TP(
+ CONSTRAINT cod_estadia_pkey PRIMARY KEY(pk_cod_estadia)
+);
