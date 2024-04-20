@@ -1,61 +1,105 @@
---TABELA OBJETO
+CREATE TYPE ESTADIA_TP AS OBJECT(
 
-CREATE TABLE PASSAGEIRO_TB OF PASSAGEIRO_TP(
-CONSTRAINT CPF_UNICO_PASSAGEIRO PRIMARY KEY (PK_CPF)
+ pk_cod_estadia INTEGER,
+ valor_estadia NUMBER(38,2),
+ data_check_in DATE,
+ data_check_out DATE
+ 
 );
 
-----
+-- ENTIDADE HOTEL
+CREATE TYPE HOTEL_TP AS OBJECT(
 
---DROP TABLE VOO;
-
-
-CREATE TABLE VOO OF VOO_TP(
-    CONSTRAINT voo_pkey PRIMARY KEY (pk_numero_voo) -- constraint de primary key
+    pkid_hotel INTEGER,
+    nome VARCHAR2(30),
+    endereco_hotel tp_endereco
 );
 
---DROP TABLE PASSAGEM;
+--PASSAGEM
+CREATE TYPE PASSAGEM_TP AS OBJECT(    
+    pk_numero_passagem VARCHAR2(22),
+    valor_passagem NUMBER(38,2),
+    data_ida DATE,
+    data_chegada DATE
+);
 
-CREATE TABLE PASSAGEM OF PASSAGEM_TP(    
-    CONSTRAINT numero_passagem_pkey PRIMARY KEY(pk_numero_passagem)
+-- ENTIDADE VOO
+CREATE OR REPLACE TYPE VOO_TP AS OBJECT(
+    pk_numero_voo NUMBER(38,0), -- trecho ID
+    origem VARCHAR2(3),       -- origem IATA 3
+    destino VARCHAR2(3),      -- destino IATA 3
+    hora_embarque TIMESTAMP,
+    hora_desembarque TIMESTAMP
+);
+
+--TIPO PESSOA
+
+CREATE OR REPLACE TYPE tp_pessoa AS OBJECT(
+    NOME VARCHAR2(20),
+    SEXO VARCHAR2(1),
+    DATA_NASCIMENTO DATE,
+    ENDERECO_PAX tp_endereco,
+    TELEFONES tp_fones,
+    EMAIL VARCHAR2(30)
+    
+)NOT FINAL;
+
+--TIPO MENOR DE IDADE
+
+CREATE TYPE MAIOR_IDADE_TP UNDER TP_PESSOA();
+
+CREATE TYPE MENOR_IDADE_TP UNDER TP_PESSOA(
+    autorizacao_viagem varchar2(3)  
 );
 
 
-
-
---DROP TABLE ESTADIA;
-
-CREATE TABLE ESTADIA OF ESTADIA_TP(
- CONSTRAINT cod_estadia_pkey PRIMARY KEY(pk_cod_estadia)
+CREATE OR REPLACE TYPE PASSAGEIRO_TP AS OBJECT(
+pk_cpf VARCHAR2(11),
+PESSOA TP_PESSOA
 );
 
 
+----- tipos de objetos
 
-CREATE TABLE HOTEL OF HOTEL_TP(
-    CONSTRAINT hotel_pkey PRIMARY KEY (pkid_hotel)
+CREATE OR REPLACE TYPE tp_endereco AS OBJECT(
+    pais varchar2(15),
+    cep varchar2(9),
+    estado varchar2(15),
+    cidade VARCHAR2(20),
+    complemento varchar2(30)
 );
 
--- RELACIONAMENTOS
+--DROP TYPE tp_endereco;
 
-CREATE TABLE REL_REFERESE_TB OF REL_REFERESE_TP(
-    CONSTRAINT FK_cod_passagem FOREIGN KEY (cod_passagem) REFERENCES PASSAGEM(pk_numero_passagem),
-    CONSTRAINT FK_cod_voo FOREIGN KEY (cod_voo) REFERENCES VOO(pk_numero_voo),
-    CONSTRAINT unique_cod_passagem UNIQUE (cod_passagem)
+CREATE OR REPLACE TYPE TP_FONE AS OBJECT (
+    COD_PAIS VARCHAR(3),
+    COD_DDD VARCHAR(5),
+    PHONE VARCHAR(10)
+);
+
+CREATE OR REPLACE TYPE TP_FONES AS VARRAY(3) OF TP_FONE;
+
+--DROP TYPE TP_FONES;
+
+---- RELACIONAMENTOS
+
+CREATE TYPE REL_REFERESE_TP AS OBJECT(
+    cod_passagem VARCHAR2(22),
+    cod_voo NUMBER(38,0)
 );
 
 
---COMPRA
-CREATE TABLE RELAC_COMPRA_TB OF RELAC_COMPRA_TP(
+--TIPO Compra
 
-CONSTRAINT passageiro_maior_cpf_fkey FOREIGN KEY(PASSAGEIRO_ID) REFERENCES MAIOR_IDADE_TB(PK_CPF),
-CONSTRAINT passageiro_menor_cpf_fkey FOREIGN KEY(PASSAGEIRO_ID) REFERENCES MENOR_IDADE_TB(PK_CPF),
-CONSTRAINT PASSAGEM_ID_FKEY FOREIGN KEY(PASSAGEM_ID) REFERENCES PASSAGEM(PK_NUMERO_PASSAGEM),
-CONSTRAINT UNIQUE_PASSAGEM_ID UNIQUE(PASSAGEM_ID)
+CREATE TYPE RELAC_COMPRA_TP AS OBJECT(
+
+    LOCALIZADOR VARCHAR2(20),
+    PASSAGEIRO_ID VARCHAR2(11),
+    PASSAGEM_ID VARCHAR2(22)
 );
 
-CREATE TABLE REL_REGISTRA_TB OF REL_REGISTRA_TP(
-    CONSTRAINT fk_rel_registra_hotel
-    FOREIGN KEY (hotel_id) REFERENCES HOTEL(pkid_hotel), 
-    CONSTRAINT fk_rel_registra_estadia
-    FOREIGN KEY (estadia_id) REFERENCES ESTADIA(pk_cod_estadia),
-    CONSTRAINT estadia_id_unique UNIQUE (estadia_id)
+---
+CREATE TYPE REL_REGISTRA_TP AS OBJECT(
+    hotel_id INTEGER,
+    estadia_id INTEGER
 );
