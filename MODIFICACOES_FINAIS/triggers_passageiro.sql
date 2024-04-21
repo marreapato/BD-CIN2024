@@ -231,6 +231,7 @@ CREATE TABLE RELAC_COMPRA_TB OF RELAC_COMPRA_TP(
 CONSTRAINT RELAC_COMPRA_PK PRIMARY KEY (PASSAGEM_ID),
 CONSTRAINT passageiro_cpf_fkey FOREIGN KEY(PASSAGEIRO_ID) REFERENCES PASSAGEIRO_TB(PK_CPF),
 CONSTRAINT PASSAGEM_ID_FKEY FOREIGN KEY(PASSAGEM_ID) REFERENCES PASSAGEM(PK_NUMERO_PASSAGEM)
+
 );
 
 INSERT INTO PASSAGEM (pk_numero_passagem,valor_passagem,data_ida,data_chegada)
@@ -242,35 +243,47 @@ TO_DATE('15/06/2012', 'DD/MM/YYYY')
 
 
 SELECT * FROM PASSAGEM;
-DROP TRIGGER CheckLocalizadorConstraint;
-
-CREATE OR REPLACE TRIGGER CheckLocalizadorConstraint
+DROP TRIGGER check_passenger_age_trigger;
+-- Create a trigger to enforce age constraint on passenger insertion
+CREATE OR REPLACE TRIGGER check_passenger_age_trigger
 BEFORE INSERT ON RELAC_COMPRA_TB
 FOR EACH ROW
 DECLARE
-    v_count_menor_idade_na NUMBER;
-    v_total_passengers_in_localizador NUMBER;
+    v_passenger_age INTEGER;
+    v_count_adult INTEGER;
 BEGIN
-    -- Count the number of passengers with AUTORIZACAO_VIAGEM = 'NAO' in the same LOCALIZADOR
-    SELECT COUNT(*)
-    INTO v_count_menor_idade_na
-    FROM RELAC_COMPRA_TB r
-    JOIN MENOR_IDADE_TB m ON r.PASSAGEIRO_ID = m.PK_CPF
-    WHERE r.LOCALIZADOR = :NEW.LOCALIZADOR
-      AND m.AUTORIZACAO_VIAGEM = 'nao';
+    -- Retrieve the date of birth (DATA_NASCIMENTO) of the passenger being inserted
+    SELECT calcular_idade_trigger(DATA_NASCIMENTO)
+    INTO v_passenger_age
+    FROM PASSAGEIRO_TB
+    WHERE PK_CPF = :new.PASSAGEIRO_ID;
 
-    -- Count the total number of passengers in the same LOCALIZADOR
-    SELECT COUNT(*)
-    INTO v_total_passengers_in_localizador
-    FROM RELAC_COMPRA_TB
-    WHERE LOCALIZADOR = :NEW.LOCALIZADOR;
+    -- Check if the age of the passenger being inserted is less than 16
+    IF v_passenger_age < 16 THEN
+        -- Count the number of adult passengers (>16) in the same booking (LOCALIZADOR)
+        SELECT COUNT(*)
+        INTO v_count_adult
+        FROM RELAC_COMPRA_TB rc
+        JOIN PASSAGEIRO_TB p ON rc.PASSAGEIRO_ID = p.PK_CPF
+        WHERE rc.LOCALIZADOR = :new.LOCALIZADOR
+          AND calcular_idade_trigger(p.DATA_NASCIMENTO) > 16;
 
-    -- Check if there are only passengers with AUTORIZACAO_VIAGEM = 'NAO' in the LOCALIZADOR
-    IF v_count_menor_idade_na = v_total_passengers_in_localizador THEN
-        RAISE_APPLICATION_ERROR(-20001, 'Cannot have only passengers from MENOR_IDADE_TP with AUTORIZACAO_VIAGEM = ''NAO'' in a LOCALIZADOR.');
+        -- If no adult passenger (>16) is found in the same booking, raise an error
+        IF v_count_adult = 0 THEN
+            -- Raise error with custom message if age constraint is violated
+            RAISE_APPLICATION_ERROR(-20001, 'At least one passenger must be older than 16 years.');
+        END IF;
     END IF;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        -- Handle case where passenger ID does not exist in PASSAGEIRO_TB
+        RAISE_APPLICATION_ERROR(-20002, 'Invalid passenger ID.');
+    WHEN OTHERS THEN
+        -- Catch-all exception handler for other errors
+        RAISE_APPLICATION_ERROR(-20003, 'Error occurred: ' || SQLERRM);
 END;
 /
+
 
 INSERT INTO PASSAGEIRO_TB(PK_CPF, NOME, SEXO, DATA_NASCIMENTO, ENDERECO_PAX, TELEFONES, EMAIL)
 VALUES('11122233344','Julia','F',TO_DATE('14/01/2008','DD/MM/YYYY'),TP_ENDERECO('BRASIL','123','BAHIA','SALVADOR','123 RUA'),
@@ -282,7 +295,7 @@ VALUES('11122223344','Juliana','F',TO_DATE('14/01/2015','DD/MM/YYYY'),TP_ENDEREC
 
 
 INSERT INTO PASSAGEIRO_TB(PK_CPF, NOME, SEXO, DATA_NASCIMENTO, ENDERECO_PAX, TELEFONES, EMAIL)
-VALUES('11122223534','Anne','F',TO_DATE('14/01/2015','DD/MM/YYYY'),TP_ENDERECO('BRASIL','123','BAHIA','SALVADOR','123 RUA'),
+VALUES('00000000000','Anne','F',TO_DATE('14/01/2000','DD/MM/YYYY'),TP_ENDERECO('BRASIL','123','BAHIA','SALVADOR','123 RUA'),
     TP_FONES(TP_FONE('55','71','983439843'),TP_FONE('55','89','948343888')),'julia@GMAIL.COM');
 
 SELECT * FROM MENOR_IDADE_TB;
@@ -290,7 +303,7 @@ SELECT * FROM MENOR_IDADE_TB;
 SELECT * FROM MAIOR_IDADE_TB;
 
 INSERT INTO RELAC_COMPRA_TB (LOCALIZADOR,PASSAGEIRO_ID,PASSAGEM_ID,DATA_COMPRA)
-VALUES(2,'11122223534',4,SYSDATE);
+VALUES(2,'11122223344',3,SYSDATE);
 
---DELETE FROM RELAC_COMPRA_TB;
+DELETE FROM RELAC_COMPRA_TB;
 SELECT * FROM relac_compra_tb;
