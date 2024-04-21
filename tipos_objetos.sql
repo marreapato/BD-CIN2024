@@ -1,3 +1,6 @@
+--DROP TYPE MENOR_IDADE_TP;
+
+
 ----- tipos de objetos
 
 CREATE OR REPLACE TYPE tp_endereco AS OBJECT(
@@ -20,7 +23,7 @@ CREATE OR REPLACE TYPE TP_FONES AS VARRAY(3) OF TP_FONE;
 
 --DROP TYPE TP_FONES;
 
--- Entidades --
+
 CREATE TYPE ESTADIA_TP AS OBJECT(
 
  pk_cod_estadia INTEGER,
@@ -69,6 +72,7 @@ CREATE OR REPLACE TYPE TP_PASSAGEIRO AS OBJECT(
     
 )NOT FINAL;
 
+
 -- Corpo da member function calcular_idade para o tipo TP_PASSAGEIRO --
 CREATE OR REPLACE TYPE BODY TP_PASSAGEIRO AS
     MEMBER FUNCTION calcular_idade RETURN NUMBER IS
@@ -92,6 +96,7 @@ CREATE TYPE MENOR_IDADE_TP UNDER TP_PASSAGEIRO(
     idade NUMBER(38,0),
     autorizacao_viagem varchar2(3)  
 );
+
 
 ---- RELACIONAMENTOS
 
