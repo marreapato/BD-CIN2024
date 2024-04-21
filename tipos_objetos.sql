@@ -1,3 +1,26 @@
+----- tipos de objetos
+
+CREATE OR REPLACE TYPE tp_endereco AS OBJECT(
+    pais varchar2(15),
+    cep varchar2(9),
+    estado varchar2(15),
+    cidade VARCHAR2(20),
+    complemento varchar2(30)
+);
+
+--DROP TYPE tp_endereco;
+
+CREATE OR REPLACE TYPE TP_FONE AS OBJECT (
+    COD_PAIS VARCHAR(3),
+    COD_DDD VARCHAR(5),
+    PHONE VARCHAR(10)
+);
+
+CREATE OR REPLACE TYPE TP_FONES AS VARRAY(3) OF TP_FONE;
+
+--DROP TYPE TP_FONES;
+
+-- Entidades --
 CREATE TYPE ESTADIA_TP AS OBJECT(
 
  pk_cod_estadia INTEGER,
@@ -69,28 +92,6 @@ CREATE TYPE MENOR_IDADE_TP UNDER TP_PASSAGEIRO(
     idade NUMBER(38,0),
     autorizacao_viagem varchar2(3)  
 );
-
------ tipos de objetos
-
-CREATE OR REPLACE TYPE tp_endereco AS OBJECT(
-    pais varchar2(15),
-    cep varchar2(9),
-    estado varchar2(15),
-    cidade VARCHAR2(20),
-    complemento varchar2(30)
-);
-
---DROP TYPE tp_endereco;
-
-CREATE OR REPLACE TYPE TP_FONE AS OBJECT (
-    COD_PAIS VARCHAR(3),
-    COD_DDD VARCHAR(5),
-    PHONE VARCHAR(10)
-);
-
-CREATE OR REPLACE TYPE TP_FONES AS VARRAY(3) OF TP_FONE;
-
---DROP TYPE TP_FONES;
 
 ---- RELACIONAMENTOS
 
