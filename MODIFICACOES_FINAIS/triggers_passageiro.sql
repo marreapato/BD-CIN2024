@@ -112,7 +112,6 @@ SELECT T.CALCULAR_IDADE() FROM MENOR_IDADE_TB T;
 
 SELECT * FROM MAIOR_IDADE_TB;
 
-EXEC MoveRecordsToMaiorIdade();
 
 CREATE OR REPLACE PROCEDURE MoveRecordsToMaiorIdade AS
     CURSOR menor_cursor IS
@@ -162,3 +161,29 @@ EXCEPTION
         RAISE;
 END MoveRecordsToMaiorIdade;
 /
+    
+EXEC MoveRecordsToMaiorIdade();
+
+
+
+CREATE OR REPLACE PROCEDURE UpdateAutorizacaoViagem AS
+BEGIN
+    -- Update AUTORIZACAO_VIAGEM to 'SIM' for passengers aged 16 years or older
+    UPDATE MENOR_IDADE_TB
+    SET AUTORIZACAO_VIAGEM = 'SIM'
+    WHERE calcular_idade_trigger(DATA_NASCIMENTO) >= 16;
+    
+    -- Commit the transaction to apply changes
+    COMMIT;
+    
+    -- Display a success message
+    DBMS_OUTPUT.PUT_LINE('Autorizacao Viagem updated successfully.');
+EXCEPTION
+    WHEN OTHERS THEN
+        -- Handle exceptions (e.g., rollback transaction, log error)
+        ROLLBACK;
+        DBMS_OUTPUT.PUT_LINE('Error updating Autorizacao Viagem: ' || SQLERRM);
+        RAISE;
+END UpdateAutorizacaoViagem;
+
+EXEC UPDATEAUTORIZACAOVIAGEM();
