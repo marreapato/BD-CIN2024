@@ -274,13 +274,6 @@ BEGIN
             RAISE_APPLICATION_ERROR(-20001, 'At least one passenger must be older than 16 years.');
         END IF;
     END IF;
-EXCEPTION
-    WHEN NO_DATA_FOUND THEN
-        -- Handle case where passenger ID does not exist in PASSAGEIRO_TB
-        RAISE_APPLICATION_ERROR(-20002, 'Invalid passenger ID.');
-    WHEN OTHERS THEN
-        -- Catch-all exception handler for other errors
-        RAISE_APPLICATION_ERROR(-20003, 'Error occurred: ' || SQLERRM);
 END;
 /
 
