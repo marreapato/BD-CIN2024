@@ -5,14 +5,14 @@ CREATE OR REPLACE PROCEDURE MoveRecordsToMaiorIdade AS
 
     v_idade NUMBER;
 BEGIN
-    -- Loop through the cursor to process each record in MENOR_IDADE_TB
+    -- Percorre o cursor para processar cada registro na MENOR_IDADE_TB
     FOR menor_rec IN menor_cursor LOOP
-        -- Calculate age using the calcular_idade_trigger function
+        -- Calcula a idade usando a função calcular_idade_trigger
         v_idade := calcular_idade_trigger(menor_rec.DATA_NASCIMENTO);
 
-        -- Check if the age is 18 years or older
+        -- Verifica se a idade é maior ou igual a 18 anos
         IF v_idade >= 18 THEN
-            -- Insert the record into MAIOR_IDADE_TB
+            -- Insere o registro na MAIOR_IDADE_TB
             INSERT INTO MAIOR_IDADE_TB (
                 PK_CPF,
                 NOME,
@@ -31,21 +31,16 @@ BEGIN
                 menor_rec.EMAIL
             );
 
-            -- Delete the record from MENOR_IDADE_TB
+            -- Exclui o registro da MENOR_IDADE_TB
             DELETE FROM MENOR_IDADE_TB
-            WHERE PK_CPF = menor_rec.PK_CPF; -- Assuming PK_CPF is the primary key
+            WHERE PK_CPF = menor_rec.PK_CPF; -- Assumindo que PK_CPF é a chave primária
         END IF;
     END LOOP;
-
-    -- Commit the transaction to apply changes
+    -- Confirma a transação para aplicar as mudanças
     COMMIT;
-EXCEPTION
-    WHEN OTHERS THEN
-        -- Handle exceptions as needed
-        ROLLBACK;
-        RAISE;
 END MoveRecordsToMaiorIdade;
 /
+
     
 EXEC MoveRecordsToMaiorIdade();
 
