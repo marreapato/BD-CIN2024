@@ -37,7 +37,7 @@ END;
 --------
 
 DROP TRIGGER check_passenger_age_trigger;
--- Create a trigger to enforce age constraint on passenger insertion
+-- Cria um gatilho para impor a restrição de idade na inserção de passageiros
 CREATE OR REPLACE TRIGGER check_passenger_age_trigger
 BEFORE INSERT ON RELAC_COMPRA_TB
 FOR EACH ROW
@@ -45,15 +45,15 @@ DECLARE
     v_passenger_age INTEGER;
     v_count_adult INTEGER;
 BEGIN
-    -- Retrieve the date of birth (DATA_NASCIMENTO) of the passenger being inserted
+    -- Recupera a data de nascimento (DATA_NASCIMENTO) do passageiro sendo inserido
     SELECT calcular_idade_trigger(DATA_NASCIMENTO)
     INTO v_passenger_age
     FROM PASSAGEIRO_TB
     WHERE PK_CPF = :new.PASSAGEIRO_ID;
 
-    -- Check if the age of the passenger being inserted is less than 16
+    -- Verifica se a idade do passageiro sendo inserido é menor que 16
     IF v_passenger_age < 16 THEN
-        -- Count the number of adult passengers (>16) in the same booking (LOCALIZADOR)
+        -- Conta o número de passageiros adultos (>16) na mesma reserva (LOCALIZADOR)
         SELECT COUNT(*)
         INTO v_count_adult
         FROM RELAC_COMPRA_TB rc
@@ -61,10 +61,10 @@ BEGIN
         WHERE rc.LOCALIZADOR = :new.LOCALIZADOR
           AND calcular_idade_trigger(p.DATA_NASCIMENTO) > 16;
 
-        -- If no adult passenger (>16) is found in the same booking, raise an error
+        -- Se nenhum passageiro adulto (>16) for encontrado na mesma reserva, gera um erro
         IF v_count_adult = 0 THEN
-            -- Raise error with custom message if age constraint is violated
-            RAISE_APPLICATION_ERROR(-20001, 'At least one passenger must be older than 16 years.');
+            -- Gera um erro com mensagem personalizada se a restrição de idade for violada
+            RAISE_APPLICATION_ERROR(-20001, 'Pelo menos um passageiro deve ser maior de 16 anos.');
         END IF;
     END IF;
 END;
