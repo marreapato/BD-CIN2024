@@ -148,3 +148,26 @@ INSERT INTO VOO_TABLE VALUES (
         )
     )
 );
+
+
+-- Inserting one more row of sample data into VOO_TABLE
+
+-- Flight 11
+INSERT INTO VOO_TABLE VALUES (
+    11,              -- pk_localizador_voo
+    'SSA',           -- origem (Salvador International Airport)
+    'CNF',           -- destino (Belo Horizonte - Confins International Airport)
+    TO_TIMESTAMP('2024-05-06 16:30:00', 'YYYY-MM-DD HH24:MI:SS'),  -- hora_embarque (boarding time)
+    TO_TIMESTAMP('2024-05-06 18:00:00', 'YYYY-MM-DD HH24:MI:SS'),  -- hora_desembarque (arrival time)
+    tp_nt_ref_relac(  -- compras (list of passenger-ticket references)
+        tp_ref_relac(
+            (SELECT REF(p) FROM PASSAGEIRO_TB p WHERE p.PK_CPF = '12345678922'),  -- passageiros (passenger reference)
+            (SELECT REF(pa) FROM PASSAGEM pa WHERE pa.pk_numero_passagem = 11)   -- passagem (ticket reference)
+        ),
+        tp_ref_relac(
+            (SELECT REF(p) FROM PASSAGEIRO_TB p WHERE p.PK_CPF = '23456289012'),  -- passageiros (passenger reference)
+            (SELECT REF(pa) FROM PASSAGEM pa WHERE pa.pk_numero_passagem = 12)   -- passagem (ticket reference)
+        )
+    )
+);
+
