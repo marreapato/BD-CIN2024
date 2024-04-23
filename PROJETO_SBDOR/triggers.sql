@@ -8,7 +8,7 @@ BEGIN
     -- Calcula a idade do novo passageiro
     v_idade := calcular_idade_trigger(:new.DATA_NASCIMENTO);
 
-    -- Determina o valor de autorizacao_viagem com base na idade
+    
     IF v_idade < 16 THEN
         v_acompanhamento_especial := 'sim';
     ELSIF v_idade >= 16 AND v_idade < 18 THEN
