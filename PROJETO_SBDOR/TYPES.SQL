@@ -51,7 +51,7 @@ CREATE TYPE MENOR_IDADE_TP UNDER TP_PASSAGEIRO(
 
 --DROP TYPE PASSAGEM_TP;
 CREATE TYPE PASSAGEM_TP AS OBJECT(    
-    pk_numero_passagem INTEGER,
+    pk_localizador_passagem INTEGER,
     valor_passagem NUMBER(38,2),
     data_ida DATE,
     data_chegada DATE
@@ -70,7 +70,7 @@ CREATE TYPE tp_nt_ref_relac AS TABLE OF tp_ref_relac;
 
 -- ENTIDADE VOO
 CREATE OR REPLACE TYPE VOO_TP AS OBJECT(
-    pk_localizador_voo NUMBER(38,0), -- trecho ID
+    pk_numero_voo NUMBER(38,0), -- trecho ID
     origem VARCHAR2(3),       -- origem IATA 3
     destino VARCHAR2(3),      -- destino IATA 3
     hora_embarque TIMESTAMP,
@@ -107,4 +107,3 @@ CREATE TYPE HOTEL_TP AS OBJECT(
     endereco_hotel tp_endereco,
     registros tp_nt_ref_registrada
 );
-
