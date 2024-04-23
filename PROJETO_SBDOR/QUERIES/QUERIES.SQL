@@ -27,3 +27,39 @@ FROM
 
 SELECT * FROM (SELECT E.PK_COD_ESTADIA,E.DATA_CHECK_IN,E.DATA_CHECK_OUT,R.PASSAGEIROS.NOME,R.PASSAGEIROS.PK_CPF AS CPF_ESTADIA FROM ESTADIA E, TABLE(E.RESERVAS) R) J
 INNER JOIN PASSAGEIRO_TB B ON J.CPF_ESTADIA=B.PK_CPF;
+
+
+-- Calcular idade --
+DECLARE
+    passageiro TP_PASSAGEIRO := TP_PASSAGEIRO(
+    '12345678901',       -- CPF 
+    'João Silva',        -- Nome 
+    'M',                 -- Sexo 
+    TO_DATE('1990-05-15', 'YYYY-MM-DD'),  -- Data de Nascimento 
+    TP_ENDERECO('Brasil', '12345-678', 'São Paulo', 'São Paulo', 'Rua A, 123'),  -- Endereço 
+    TP_FONES(TP_FONE('55', '11', '91234-5678'), TP_FONE('55', '11', '98765-4321')),  -- Telefones 
+    'joao.silva@gmail.com'  -- Email
+    );
+    idade NUMBER;
+BEGIN
+    -- Chamando a MEMBER FUNCTION calcular_idade do objeto passageiro --
+    idade := passageiro.calcular_idade();
+
+    -- Exibindo a idade calculada --
+    DBMS_OUTPUT.PUT_LINE('A idade do passageiro é: ' || idade);
+END;
+
+
+-- Calcular média de idade por sexo --
+SELECT 
+    P.SEXO AS SEXO_PASSAGEIRO,
+    AVG(TRUNC(MONTHS_BETWEEN(SYSDATE, P.DATA_NASCIMENTO) / 12)) AS MEDIA_IDADE,
+    MIN(TRUNC(MONTHS_BETWEEN(SYSDATE, P.DATA_NASCIMENTO) / 12)) AS IDADE_MINIMA,
+    MAX(TRUNC(MONTHS_BETWEEN(SYSDATE, P.DATA_NASCIMENTO) / 12)) AS IDADE_MAXIMA
+FROM 
+    PASSAGEIRO_TB P 
+WHERE 
+    TRUNC(MONTHS_BETWEEN(SYSDATE, P.DATA_NASCIMENTO) / 12) > 18
+GROUP BY 
+    P.SEXO;
+
