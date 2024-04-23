@@ -82,4 +82,18 @@ INSERT INTO PASSAGEM VALUES (
     TO_DATE('2024-05-06', 'YYYY-MM-DD')   -- data_chegada (arrival date, same as departure)
 );
 
+-- Row 4
+INSERT INTO PASSAGEM VALUES (
+    11,                 -- pk_numero_passagem
+    210.00,            -- valor_passagem
+    TO_DATE('2024-04-29', 'YYYY-MM-DD'),  -- data_ida (departure date)
+    TO_DATE('2024-04-29', 'YYYY-MM-DD')   -- data_chegada (arrival date, same as departure)
+);
 
+-- Row 5
+INSERT INTO PASSAGEM VALUES (
+    12,                 -- pk_numero_passagem
+    350.25,            -- valor_passagem
+    TO_DATE('2024-04-30', 'YYYY-MM-DD'),  -- data_ida (departure date)
+    TO_DATE('2024-04-30', 'YYYY-MM-DD')   -- data_chegada (arrival date, same as departure)
+);
