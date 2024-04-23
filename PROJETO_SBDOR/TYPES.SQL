@@ -92,7 +92,6 @@ CREATE TYPE ESTADIA_TP AS OBJECT(
 
     
 CREATE OR REPLACE TYPE tp_ref_registrada AS OBJECT(
-passageiros REF TP_PASSAGEIRO,
 estadias REF ESTADIA_TP) NOT FINAL;
 /
     
@@ -108,3 +107,4 @@ CREATE TYPE HOTEL_TP AS OBJECT(
     endereco_hotel tp_endereco,
     registros tp_nt_ref_registrada
 );
+
