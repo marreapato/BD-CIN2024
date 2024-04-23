@@ -10,11 +10,11 @@ CREATE TABLE MAIOR_IDADE_TB OF MAIOR_IDADE_TP;
 
 
 CREATE TABLE PASSAGEM OF PASSAGEM_TP(    
-    CONSTRAINT numero_passagem_pkey PRIMARY KEY(pk_numero_passagem)
+    CONSTRAINT numero_passagem_pkey PRIMARY KEY(pk_localizador_passagem)
 );
 
 CREATE TABLE VOO_TABLE OF voo_tp (
-    CONSTRAINT pkey_localizador_voo PRIMARY KEY (pk_localizador_voo)
+    CONSTRAINT pkey_localizador_voo PRIMARY KEY (pk_numero_voo)
 
 ) NESTED TABLE COMPRAS STORE AS LISTA_COMPRAS;
 
