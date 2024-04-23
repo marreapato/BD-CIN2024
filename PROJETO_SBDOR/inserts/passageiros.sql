@@ -55,3 +55,59 @@ INSERT INTO PASSAGEIRO_TB VALUES (
     'luiz.pereira@outlook.com'  -- Email
 );
 
+-- Row 6
+INSERT INTO PASSAGEIRO_TB VALUES (
+    '67890123456',       -- CPF
+    'Carla Souza',       -- Nome
+    'F',                 -- Sexo
+    TO_DATE('2006-04-12', 'YYYY-MM-DD'),  -- Data de Nascimento
+    TP_ENDERECO('Brasil', '34567-890', 'Curitiba', 'Paraná', 'Rua F, 345'),  -- Endereço
+    TP_FONES(TP_FONE('55', '41', '98765-4321')),  -- Telefones
+    'carla.souza@gmail.com'  -- Email
+);
+
+-- Row 7
+INSERT INTO PASSAGEIRO_TB VALUES (
+    '78901234567',       -- CPF
+    'Fernando Almeida',  -- Nome
+    'M',                 -- Sexo
+    TO_DATE('2007-07-25', 'YYYY-MM-DD'),  -- Data de Nascimento
+    TP_ENDERECO('Brasil', '45678-901', 'Recife', 'Pernambuco', 'Av. G, 456'),  -- Endereço
+    TP_FONES(TP_FONE('55', '81', '97654-3210'), TP_FONE('55', '81', '99887-6543')),  -- Telefones
+    'fernando.almeida@yahoo.com'  -- Email
+);
+
+-- Row 8
+INSERT INTO PASSAGEIRO_TB VALUES (
+    '89012345678',       -- CPF
+    'Lúcia Ramos',       -- Nome
+    'F',                 -- Sexo
+    TO_DATE('2005-11-08', 'YYYY-MM-DD'),  -- Data de Nascimento
+    TP_ENDERECO('Brasil', '56789-012', 'Fortaleza', 'Ceará', 'Rua H, 567'),  -- Endereço
+    TP_FONES(TP_FONE('55', '85', '96543-2109')),  -- Telefones
+    'lucia.ramos@outlook.com'  -- Email
+);
+
+-- Row 9
+INSERT INTO PASSAGEIRO_TB VALUES (
+    '90123456789',       -- CPF
+    'Ricardo Martins',   -- Nome
+    'M',                 -- Sexo
+    TO_DATE('2008-02-18', 'YYYY-MM-DD'),  -- Data de Nascimento
+    TP_ENDERECO('Brasil', '67890-123', 'Florianópolis', 'Santa Catarina', 'Av. I, 678'),  -- Endereço
+    TP_FONES(TP_FONE('55', '48', '91234-5678')),  -- Telefones
+    'ricardo.martins@gmail.com'  -- Email
+);
+
+-- Row 10
+INSERT INTO PASSAGEIRO_TB VALUES (
+    '01234567890',       -- CPF
+    'Beatriz Mendes',    -- Nome
+    'F',                 -- Sexo
+    TO_DATE('2005-09-20', 'YYYY-MM-DD'),  -- Data de Nascimento
+    TP_ENDERECO('Brasil', '01234-567', 'Porto Alegre', 'Rio Grande do Sul', 'Av. E, 234'),  -- Endereço
+    TP_FONES(TP_FONE('55', '62', '99876-5432')),  -- Telefones
+    'beatriz.mendes@yahoo.com'  -- Email
+);
+
+
