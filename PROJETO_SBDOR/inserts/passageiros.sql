@@ -110,4 +110,24 @@ INSERT INTO PASSAGEIRO_TB VALUES (
     'beatriz.mendes@yahoo.com'  -- Email
 );
 
+-- Row 11
+INSERT INTO PASSAGEIRO_TB VALUES (
+    '12345678922',       -- CPF
+    'Eduardo Ferreira',  -- Nome
+    'M',                 -- Sexo
+    TO_DATE('2010-03-12', 'YYYY-MM-DD'),  -- Data de Nascimento
+    TP_ENDERECO('Brasil', '12345-678', 'São Paulo', 'São Paulo', 'Av. K, 123'),  -- Endereço
+    TP_FONES(TP_FONE('55', '11', '98765-4321')),  -- Telefones
+    'eduardo.ferreira@gmail.com'  -- Email
+);
 
+-- Row 12
+INSERT INTO PASSAGEIRO_TB VALUES (
+    '23456289012',       -- CPF
+    'Sônia Rodrigues',   -- Nome
+    'F',                 -- Sexo
+    TO_DATE('2010-07-05', 'YYYY-MM-DD'),  -- Data de Nascimento
+    TP_ENDERECO('Brasil', '54321-876', 'Rio de Janeiro', 'Rio de Janeiro', 'Rua L, 456'),  -- Endereço
+    TP_FONES(TP_FONE('55', '21', '99887-6543')),  -- Telefones
+    'sonia.rodrigues@yahoo.com'  -- Email
+);
