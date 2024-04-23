@@ -1,5 +1,5 @@
 -- Inserting sample data into ESTADIA table
-DELETE FROM ESTADIA;
+--DELETE FROM ESTADIA;
 -- Stay 1
 INSERT INTO ESTADIA VALUES (
     1,                     -- pk_cod_estadia
@@ -9,11 +9,11 @@ INSERT INTO ESTADIA VALUES (
     tp_nt_ref_relac(       -- reservas (list of passenger-ticket references)
         tp_ref_relac(
             (SELECT REF(p) FROM PASSAGEIRO_TB p WHERE p.PK_CPF = '12345678901'),  -- passageiros (passenger reference)
-            (SELECT REF(pa) FROM PASSAGEM pa WHERE pa.pk_numero_passagem = 1)     -- passagem (ticket reference)
+            (SELECT REF(pa) FROM PASSAGEM pa WHERE pa.pk_localizador_passagem = 1)     -- passagem (ticket reference)
         ),
         tp_ref_relac(
             (SELECT REF(p) FROM PASSAGEIRO_TB p WHERE p.PK_CPF = '23456789012'),  -- passageiros (passenger reference)
-            (SELECT REF(pa) FROM PASSAGEM pa WHERE pa.pk_numero_passagem = 2)     -- passagem (ticket reference)
+            (SELECT REF(pa) FROM PASSAGEM pa WHERE pa.pk_localizador_passagem = 2)     -- passagem (ticket reference)
         )
     )
 );
@@ -27,7 +27,7 @@ INSERT INTO ESTADIA VALUES (
     tp_nt_ref_relac(       -- reservas (list of passenger-ticket references)
         tp_ref_relac(
             (SELECT REF(p) FROM PASSAGEIRO_TB p WHERE p.PK_CPF = '34567890123'),  -- passageiros (passenger reference)
-            (SELECT REF(pa) FROM PASSAGEM pa WHERE pa.pk_numero_passagem = 3)     -- passagem (ticket reference)
+            (SELECT REF(pa) FROM PASSAGEM pa WHERE pa.pk_localizador_passagem = 3)     -- passagem (ticket reference)
         )
     )
 );
@@ -41,11 +41,11 @@ INSERT INTO ESTADIA VALUES (
     tp_nt_ref_relac(       -- reservas (list of passenger-ticket references)
         tp_ref_relac(
             (SELECT REF(p) FROM PASSAGEIRO_TB p WHERE p.PK_CPF = '45678901234'),  -- passageiros (passenger reference)
-            (SELECT REF(pa) FROM PASSAGEM pa WHERE pa.pk_numero_passagem = 4)     -- passagem (ticket reference)
+            (SELECT REF(pa) FROM PASSAGEM pa WHERE pa.pk_localizador_passagem = 4)     -- passagem (ticket reference)
         ),
         tp_ref_relac(
             (SELECT REF(p) FROM PASSAGEIRO_TB p WHERE p.PK_CPF = '56789012345'),  -- passageiros (passenger reference)
-            (SELECT REF(pa) FROM PASSAGEM pa WHERE pa.pk_numero_passagem = 5)     -- passagem (ticket reference)
+            (SELECT REF(pa) FROM PASSAGEM pa WHERE pa.pk_localizador_passagem = 5)     -- passagem (ticket reference)
         )
     )
 );
@@ -59,7 +59,7 @@ INSERT INTO ESTADIA VALUES (
     tp_nt_ref_relac(       -- reservas (list of passenger-ticket references)
         tp_ref_relac(
             (SELECT REF(p) FROM PASSAGEIRO_TB p WHERE p.PK_CPF = '67890123456'),  -- passageiros (passenger reference)
-            (SELECT REF(pa) FROM PASSAGEM pa WHERE pa.pk_numero_passagem = 6)     -- passagem (ticket reference)
+            (SELECT REF(pa) FROM PASSAGEM pa WHERE pa.pk_localizador_passagem = 6)     -- passagem (ticket reference)
         )
     )
 );
@@ -73,11 +73,11 @@ INSERT INTO ESTADIA VALUES (
     tp_nt_ref_relac(       -- reservas (list of passenger-ticket references)
         tp_ref_relac(
             (SELECT REF(p) FROM PASSAGEIRO_TB p WHERE p.PK_CPF = '78901234567'),  -- passageiros (passenger reference)
-            (SELECT REF(pa) FROM PASSAGEM pa WHERE pa.pk_numero_passagem = 7)     -- passagem (ticket reference)
+            (SELECT REF(pa) FROM PASSAGEM pa WHERE pa.pk_localizador_passagem = 7)     -- passagem (ticket reference)
         ),
         tp_ref_relac(
             (SELECT REF(p) FROM PASSAGEIRO_TB p WHERE p.PK_CPF = '89012345678'),  -- passageiros (passenger reference)
-            (SELECT REF(pa) FROM PASSAGEM pa WHERE pa.pk_numero_passagem = 8)     -- passagem (ticket reference)
+            (SELECT REF(pa) FROM PASSAGEM pa WHERE pa.pk_localizador_passagem = 8)     -- passagem (ticket reference)
         )
     )
 );
