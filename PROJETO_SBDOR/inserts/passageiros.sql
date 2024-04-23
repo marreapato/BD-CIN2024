@@ -1,17 +1,17 @@
--- Inserting first 5 rows of sample data into PASSAGEIRO_TB
 
--- Row 1
+
+--  1
 INSERT INTO PASSAGEIRO_TB VALUES (
-    '12345678901',       -- CPF (Brazilian ID number)
-    'João Silva',        -- Nome (Name)
-    'M',                 -- Sexo (Gender: M for male, F for female)
-    TO_DATE('1990-05-15', 'YYYY-MM-DD'),  -- Data de Nascimento (Date of Birth)
-    TP_ENDERECO('Brasil', '12345-678', 'São Paulo', 'São Paulo', 'Rua A, 123'),  -- Endereço (Address)
-    TP_FONES(TP_FONE('55', '11', '91234-5678'), TP_FONE('55', '11', '98765-4321')),  -- Telefones (Phone numbers)
+    '12345678901',       -- CPF
+    'João Silva',        -- Nome
+    'M',                 -- Sexo
+    TO_DATE('1990-05-15', 'YYYY-MM-DD'),  -- Data de Nascimento
+    TP_ENDERECO('Brasil', '12345-678', 'São Paulo', 'São Paulo', 'Rua A, 123'),  -- Endereço
+    TP_FONES(TP_FONE('55', '11', '91234-5678'), TP_FONE('55', '11', '98765-4321')),  -- Telefones
     'joao.silva@gmail.com'  -- Email
 );
 
--- Row 2
+--  2
 INSERT INTO PASSAGEIRO_TB VALUES (
     '23456789012',       -- CPF
     'Maria Santos',      -- Nome
@@ -22,7 +22,7 @@ INSERT INTO PASSAGEIRO_TB VALUES (
     'maria.santos@yahoo.com'  -- Email
 );
 
--- Row 3
+--  3
 INSERT INTO PASSAGEIRO_TB VALUES (
     '34567890123',       -- CPF
     'Pedro Oliveira',    -- Nome
@@ -33,7 +33,7 @@ INSERT INTO PASSAGEIRO_TB VALUES (
     'pedro.oliveira@outlook.com'  -- Email
 );
 
--- Row 4
+--  4
 INSERT INTO PASSAGEIRO_TB VALUES (
     '45678901234',       -- CPF
     'Ana Costa',         -- Nome
@@ -44,7 +44,7 @@ INSERT INTO PASSAGEIRO_TB VALUES (
     'ana.costa@gmail.com'  -- Email
 );
 
--- Row 5
+--  5
 INSERT INTO PASSAGEIRO_TB VALUES (
     '56789012345',       -- CPF
     'Luiz Pereira',      -- Nome
@@ -55,7 +55,7 @@ INSERT INTO PASSAGEIRO_TB VALUES (
     'luiz.pereira@outlook.com'  -- Email
 );
 
--- Row 6
+--  6
 INSERT INTO PASSAGEIRO_TB VALUES (
     '67890123456',       -- CPF
     'Carla Souza',       -- Nome
@@ -66,7 +66,7 @@ INSERT INTO PASSAGEIRO_TB VALUES (
     'carla.souza@gmail.com'  -- Email
 );
 
--- Row 7
+--  7
 INSERT INTO PASSAGEIRO_TB VALUES (
     '78901234567',       -- CPF
     'Fernando Almeida',  -- Nome
@@ -77,7 +77,7 @@ INSERT INTO PASSAGEIRO_TB VALUES (
     'fernando.almeida@yahoo.com'  -- Email
 );
 
--- Row 8
+--  8
 INSERT INTO PASSAGEIRO_TB VALUES (
     '89012345678',       -- CPF
     'Lúcia Ramos',       -- Nome
@@ -88,7 +88,7 @@ INSERT INTO PASSAGEIRO_TB VALUES (
     'lucia.ramos@outlook.com'  -- Email
 );
 
--- Row 9
+--  9
 INSERT INTO PASSAGEIRO_TB VALUES (
     '90123456789',       -- CPF
     'Ricardo Martins',   -- Nome
@@ -99,7 +99,7 @@ INSERT INTO PASSAGEIRO_TB VALUES (
     'ricardo.martins@gmail.com'  -- Email
 );
 
--- Row 10
+--  10
 INSERT INTO PASSAGEIRO_TB VALUES (
     '01234567890',       -- CPF
     'Beatriz Mendes',    -- Nome
@@ -110,7 +110,7 @@ INSERT INTO PASSAGEIRO_TB VALUES (
     'beatriz.mendes@yahoo.com'  -- Email
 );
 
--- Row 11
+--  11
 INSERT INTO PASSAGEIRO_TB VALUES (
     '12345678922',       -- CPF
     'Eduardo Ferreira',  -- Nome
@@ -121,7 +121,7 @@ INSERT INTO PASSAGEIRO_TB VALUES (
     'eduardo.ferreira@gmail.com'  -- Email
 );
 
--- Row 12
+--  12
 INSERT INTO PASSAGEIRO_TB VALUES (
     '23456289012',       -- CPF
     'Sônia Rodrigues',   -- Nome
